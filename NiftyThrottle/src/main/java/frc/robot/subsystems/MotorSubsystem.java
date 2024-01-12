@@ -38,6 +38,13 @@ public class MotorSubsystem extends SubsystemBase {
     m_rightStickYAxis = rightStickYAxis;
   }
 
+  public void toggleMotor1() {
+    m_motor1Enabled = !m_motor1Enabled;
+  }
+
+  public void toggleMotor2() {
+  m_motor2Enabled = !m_motor2Enabled;
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
