@@ -50,10 +50,23 @@ public class MotorSubsystem extends SubsystemBase {
     }
     
     if(counter % 50 == 0){
-      System.out.println(m_motor1Enabled);
-      System.out.println(m_motor2Enabled);
-      System.out.println(m_motor1SetPoint);
-      System.out.println(m_motor2SetPoint);
+
+      if(m_motor1Enabled = true){
+        System.out.print("Motor1 ON" + m_motor1SetPoint*10 + "%");
+      }
+      else{
+        System.out.print("Motor1 OFF" + m_motor1SetPoint*10 + "%");
+      }
+
+      System.out.print("  ");
+
+      if(m_motor2Enabled = true){
+        System.out.print("Motor2 ON" + m_motor2SetPoint*10 + "%");
+      }
+      else{
+        System.out.print("Motor2 OFF" + m_motor2SetPoint*10 + "%");
+      }
+
     }
     
   }
