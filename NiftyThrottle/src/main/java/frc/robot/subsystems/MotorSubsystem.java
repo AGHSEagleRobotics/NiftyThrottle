@@ -7,14 +7,55 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.revrobotics.CANSparkMax;
+
 public class MotorSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public MotorSubsystem() {}
+  private int counter = 0;
+
+  private final CANSparkMax m_motor1;
+  private final CANSparkMax m_motor2;
+
+  private double m_motor1SetPoint = 0;
+  private boolean m_motor1Enabled = false;
+
+  private double m_motor2SetPoint = 0;
+  private boolean m_motor2Enabled = false;
+  
+  public MotorSubsystem(CANSparkMax motor1, CANSparkMax motor2){
+    m_motor1 = motor1;
+    m_motor2 = motor2;
+
+  }
 
 
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    counter++;
+
+    if(!m_motor1Enabled){
+      m_motor1.set(0);
+    }
+    else{
+      m_motor1.set(m_motor1SetPoint);
+    }
+
+    if(!m_motor2Enabled){
+      m_motor2.set(0);
+    }
+    else{
+      m_motor2.set(m_motor2SetPoint);
+    }
+    
+    if(counter % 50 == 0){
+      System.out.println(m_motor1Enabled);
+      System.out.println(m_motor2Enabled);
+      System.out.println(m_motor1SetPoint);
+      System.out.println(m_motor2SetPoint);
+    }
+    
   }
 
   @Override
