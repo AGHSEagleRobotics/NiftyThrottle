@@ -80,7 +80,6 @@ public class MotorSubsystem extends SubsystemBase {
       if(m_motor1Enabled = true){
         System.out.print("Motor1 ON " + m_motor1SetPoint*10 + "%");
       }
-<<<<<<< .mine
       else{
         System.out.print("Motor1 OFF " + m_motor1SetPoint*10 + "%");
       }
@@ -96,23 +95,6 @@ public class MotorSubsystem extends SubsystemBase {
 
     }
     
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> .theirs
   }
 
   @Override
