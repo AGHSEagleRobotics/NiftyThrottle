@@ -4,9 +4,11 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import java.util.function.Supplier;
 import com.revrobotics.CANSparkMax;
 
 public class MotorSubsystem extends SubsystemBase {
@@ -21,39 +23,64 @@ public class MotorSubsystem extends SubsystemBase {
 
   private double m_motor2SetPoint = 0;
   private boolean m_motor2Enabled = false;
-  
-  public MotorSubsystem(CANSparkMax motor1, CANSparkMax motor2){
+
+  private Supplier<Double> m_leftStickYAxis;
+  private Supplier<Double> m_rightStickYAxis;
+
+  public MotorSubsystem(CANSparkMax motor1, 
+                        CANSparkMax motor2,
+                        Supplier<Double> leftStickYAxis, 
+                        Supplier<Double> rightStickYAxis) {
     m_motor1 = motor1;
     m_motor2 = motor2;
 
+    m_leftStickYAxis = leftStickYAxis;
+    m_rightStickYAxis = rightStickYAxis;
   }
 
-
-  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     counter++;
 
-    if(!m_motor1Enabled){
+    // setting motor
+
+    if (counter % 10 == 0) {
+      double leftStick = m_leftStickYAxis.get();
+      double rightStick = m_rightStickYAxis.get();
+
+      if (leftStick > 0.5) {
+        m_motor1SetPoint += 0.05;
+      }
+
+      if (rightStick > 0.5) {
+        m_motor2SetPoint += 0.05;
+      }
+
+      // turning on motor
+
+      if (!m_motor1Enabled) {
       m_motor1.set(0);
-    }
-    else{
+      } else {
       m_motor1.set(m_motor1SetPoint);
     }
 
-    if(!m_motor2Enabled){
+      if (!m_motor2Enabled) {
       m_motor2.set(0);
-    }
-    else{
+      } else {
       m_motor2.set(m_motor2SetPoint);
     }
+
+    }
+
+    // printing motor
     
-    if(counter % 50 == 0){
+    if (counter % 50 == 0) {
 
       if(m_motor1Enabled = true){
         System.out.print("Motor1 ON " + m_motor1SetPoint*10 + "%");
       }
+<<<<<<< .mine
       else{
         System.out.print("Motor1 OFF " + m_motor1SetPoint*10 + "%");
       }
@@ -69,10 +96,27 @@ public class MotorSubsystem extends SubsystemBase {
 
     }
     
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> .theirs
   }
 
   @Override
-  public void simulationPeriodic() {
+  public void simulationPeriodic() {  
     // This method will be called once per scheduler run during simulation
   }
 }
