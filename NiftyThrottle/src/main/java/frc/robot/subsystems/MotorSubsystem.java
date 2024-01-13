@@ -55,23 +55,27 @@ public class MotorSubsystem extends SubsystemBase {
     if (counter % 10 == 0) {
       double leftStick = m_leftStickYAxis.get();
       double rightStick = m_rightStickYAxis.get();
-
+      
       if (leftStick > 0.5) {
         m_motor1SetPoint -= 0.05;
+        MathUtil.clamp(m_motor1SetPoint, -1.0, 1.0);
       }
 
       if (rightStick > 0.5) {
         m_motor2SetPoint -= 0.05;
+        MathUtil.clamp(m_motor2SetPoint, -1.0, 1.0);
       }
 
       if (leftStick < -0.5) {
         m_motor1SetPoint += 0.05;
+        MathUtil.clamp(m_motor1SetPoint, -1.0, 1.0);
       }
 
       if (rightStick < -0.5) {
         m_motor2SetPoint += 0.05;
+        MathUtil.clamp(m_motor2SetPoint, -1.0, 1.0);
       }
-
+    
       // turning on motor
 
       if (!m_motor1Enabled) {
@@ -92,22 +96,22 @@ public class MotorSubsystem extends SubsystemBase {
     
     if (counter % 50 == 0) {
 
-      if(m_motor1Enabled = true){
-        System.out.print("Motor1 ON " + m_motor1SetPoint*10 + "%");
+      if(m_motor1Enabled){
+        System.out.print("Motor1 ON " + (int) (m_motor1SetPoint*100+(Math.signum(m_motor1SetPoint)*0.5)) + "%");
       }
       else{
-        System.out.print("Motor1 OFF " + m_motor1SetPoint*10 + "%");
+        System.out.print("Motor1 OFF " + (int) (m_motor1SetPoint*100+(Math.signum(m_motor1SetPoint)*0.5)) + "%");
       }
 
       System.out.print("  ");
 
-      if(m_motor2Enabled = true){
-        System.out.print("Motor2 ON " + m_motor2SetPoint*10 + "%");
+      if(m_motor2Enabled){
+        System.out.print("Motor2 ON " + (int) (m_motor2SetPoint*100+(Math.signum(m_motor2SetPoint)*0.5)) + "%");
       }
       else{
-        System.out.print("Motor2 OFF " + m_motor2SetPoint*10 + "%");
+        System.out.print("Motor2 OFF " + (int) (m_motor2SetPoint*100+(Math.signum(m_motor2SetPoint)*0.5)) + "%");
       }
-
+      System.out.println();
     }
     
   }
