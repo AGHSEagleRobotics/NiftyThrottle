@@ -31,8 +31,8 @@ public class RobotContainer {
    // Replace with CommandPS4Controller or CommandJoystick if needed
 
    private final MotorSubsystem m_motorSubsystem = new MotorSubsystem(
-       new CANSparkMax(1, MotorType.kBrushed),
-       new CANSparkMax(2, MotorType.kBrushed),
+       new CANSparkMax(1, MotorType.kBrushless),
+       new CANSparkMax(2, MotorType.kBrushless),
        () -> m_driverController.getLeftY(),
        () -> m_driverController.getRightY());
 
