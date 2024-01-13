@@ -57,10 +57,18 @@ public class MotorSubsystem extends SubsystemBase {
       double rightStick = m_rightStickYAxis.get();
 
       if (leftStick > 0.5) {
-        m_motor1SetPoint += 0.05;
+        m_motor1SetPoint -= 0.05;
       }
 
       if (rightStick > 0.5) {
+        m_motor2SetPoint -= 0.05;
+      }
+
+      if (leftStick < -0.5) {
+        m_motor1SetPoint += 0.05;
+      }
+
+      if (rightStick < -0.5) {
         m_motor2SetPoint += 0.05;
       }
 
